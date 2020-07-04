@@ -1,10 +1,8 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
 import Avatar from "react-avatar";
 
 const Home = () => {
-  const history = useHistory();
   return (
     <>
       <Row>
