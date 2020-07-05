@@ -21,7 +21,6 @@ const Navigation = () => {
   };
 
   const setActiveLink = (homeLinkActive, profileLinkActive) => {
-    console.log(homeLinkActive, profileLinkActive);
     setHomeLinkActive(homeLinkActive);
     setProfileLinkActive(profileLinkActive);
   };
