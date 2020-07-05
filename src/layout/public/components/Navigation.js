@@ -16,7 +16,7 @@ const Navigation = () => {
           <Nav.Link href="/home">Home</Nav.Link>
           {loggedIn ? <Nav.Link href="/profile">Profile</Nav.Link> : null}
         </Nav>
-        <Button variant="outline-success" onClick={() => hanldeUserLogIn()}>
+        <Button variant="primary" onClick={() => hanldeUserLogIn()}>
           Login
         </Button>
       </Navbar.Collapse>
