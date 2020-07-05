@@ -13,50 +13,7 @@ function App() {
   const [ETHEUR, setETHEUR] = useState({});
   const [EOSUSD, setEOSUSD] = useState({});
 
-  wss.onmessage = (msg) => {
-    const data = JSON.parse(msg.data);
-    if (typeof data === "object" && data.event === "subscribed") {
-      const copiedChannels = { ...channels };
-      copiedChannels[data.chanId] = data.pair;
-      setChannels(copiedChannels);
-    } else if (
-      Array.isArray(data) &&
-      data.length === 2 &&
-      Array.isArray(data[1])
-    ) {
-      const [channelID, values] = data;
-      const indexArr = [4, 6, 7];
-      const [dailyChange, lastPrice, volume] = indexArr.map((i) => values[i]);
-      const ticker = {
-        dailyChange,
-        lastPrice,
-        volume,
-        symbol: channels[channelID],
-      };
-
-      switch (channels[channelID]) {
-        case "BTCUSD":
-          setBTCUSD(ticker);
-          break;
-        case "BTCEUR":
-          setBTCEUR(ticker);
-          break;
-        case "ETHUSD":
-          setETHUSD(ticker);
-          break;
-        case "ETHEUR":
-          setETHEUR(ticker);
-          break;
-        case "EOSUSD":
-          setEOSUSD(ticker);
-          break;
-
-        default:
-          break;
-      }
-    }
-  };
-
+  //subscribing to channels
   useEffect(() => {
     wss.onopen = () => {
       symbols.forEach((symbol) => {
@@ -69,6 +26,65 @@ function App() {
       });
     };
   }, []);
+
+  //unsubscribing from channels
+  useEffect((channels) => {
+    return () => {
+      Object.keys(channels).forEach((chanId) => {
+        let msg = JSON.stringify({
+          event: "unsubscribe",
+          chanId,
+        });
+        wss.send(msg);
+      });
+    };
+  }, []);
+
+  //handling subsribed messages
+  wss.onmessage = (msg) => {
+      const data = JSON.parse(msg.data);
+      if (typeof data === "object" && data.event === "subscribed") {
+        const copiedChannels = { ...channels };
+        copiedChannels[data.chanId] = data.pair;
+        setChannels(copiedChannels);
+      } else if (
+        Array.isArray(data) &&
+        data.length === 2 &&
+        Array.isArray(data[1])
+      ) {
+        const [channelID, values] = data;
+        const indexArr = [5, 6, 7];
+        const [dailyChange, lastPrice, volume] = indexArr.map((i) => values[i]);
+        const ticker = {
+          dailyChange:(dailyChange*100).toFixed(1) + '%',
+          lastPrice:lastPrice.toFixed(1),
+          volume:volume.toFixed(),
+          symbol: channels[channelID],
+        };
+  
+        switch (channels[channelID]) {
+          case "BTCUSD":
+            setBTCUSD(ticker);
+            break;
+          case "BTCEUR":
+            setBTCEUR(ticker);
+            break;
+          case "ETHUSD":
+            setETHUSD(ticker);
+            break;
+          case "ETHEUR":
+            setETHEUR(ticker);
+            break;
+          case "EOSUSD":
+            setEOSUSD(ticker);
+            break;
+  
+          default:
+            break;
+        }
+      }
+   
+  };
 
   return <DefaultPage tickers={{ BTCUSD, BTCEUR, ETHUSD, ETHEUR, EOSUSD }} />;
 }

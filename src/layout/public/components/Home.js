@@ -1,6 +1,5 @@
 import React, { useMemo } from "react";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
-import Profile from "../../private/components/Profile";
 
 const tabelHeaders = [
   { value: "index", name: "#" },
