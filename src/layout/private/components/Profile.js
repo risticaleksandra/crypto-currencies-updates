@@ -2,7 +2,8 @@ import React from "react";
 import { Row, Col } from "react-bootstrap";
 import Avatar from "react-avatar";
 
-const Home = () => {
+const Profile = () => {
+    console.log('profile')
   return (
     <>
       <Row>
@@ -25,4 +26,4 @@ const Home = () => {
     </>
   );
 };
-export default Home;
+export default Profile;
