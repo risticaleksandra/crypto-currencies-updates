@@ -6,7 +6,7 @@ const symbols = ["tBTCUSD", "tBTCEUR", "tETHUSD", "tETHEUR", "tEOSUSD"];
 const wss = new WebSocket("wss://api-pub.bitfinex.com/ws/2");
 
 function App() {
-  const channels = {};
+  const [channels, setChannels] = useState({});
   const [BTCUSD, setBTCUSD] = useState({});
   const [BTCEUR, setBTCEUR] = useState({});
   const [ETHUSD, setETHUSD] = useState({});
@@ -16,16 +16,23 @@ function App() {
   wss.onmessage = (msg) => {
     const data = JSON.parse(msg.data);
     if (typeof data === "object" && data.event === "subscribed") {
-      channels[data.chanId] = data.pair;
+      const copiedChannels = { ...channels };
+      copiedChannels[data.chanId] = data.pair;
+      setChannels(copiedChannels);
     } else if (
       Array.isArray(data) &&
-      data.length >= 2 &&
+      data.length === 2 &&
       Array.isArray(data[1])
     ) {
       const [channelID, values] = data;
       const indexArr = [4, 6, 7];
       const [dailyChange, lastPrice, volume] = indexArr.map((i) => values[i]);
-      const ticker = { dailyChange, lastPrice, volume, symbol: channels[channelID]}
+      const ticker = {
+        dailyChange,
+        lastPrice,
+        volume,
+        symbol: channels[channelID],
+      };
 
       switch (channels[channelID]) {
         case "BTCUSD":
@@ -56,7 +63,7 @@ function App() {
         let msg = JSON.stringify({
           event: "subscribe",
           channel: "ticker",
-          symbol: symbol,
+          symbol,
         });
         wss.send(msg);
       });

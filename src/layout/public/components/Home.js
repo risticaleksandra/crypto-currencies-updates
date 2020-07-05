@@ -1,8 +1,7 @@
 import React from "react";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 
-const Home = ({ tickers }) => {
-  const tabelHeaders = [
+const tabelHeaders = [
     { value: "index", name: "#" },
     { value: "symbol", name: "Symbol" },
     { value: "dailyChange", name: "Daily Change" },
@@ -10,6 +9,8 @@ const Home = ({ tickers }) => {
     { value: "lastPrice", name: "Last Price" },
   ];
 
+const Home = ({ tickers }) => {
+    console.log(tickers, 'tickers')
   return (
     <BootstrapTable
       keyField="index"
@@ -19,7 +20,7 @@ const Home = ({ tickers }) => {
       }))}
       hover={true}
     >
-      {tabelHeaders.map((column) => (
+      {tabelHeaders.map((column, index) => (
         <TableHeaderColumn dataField={column.value} dataSort={true} width="20%">
           {column.name}
         </TableHeaderColumn>

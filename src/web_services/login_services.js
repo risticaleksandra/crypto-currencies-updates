@@ -10,7 +10,6 @@ const setLoginFlag = () => {
 };
 
 const isLoggedIn = () => {
-  console.log(localStorage.getItem("loggedIn"));
   return localStorage.getItem("loggedIn")
     ? localStorage.getItem("loggedIn")
     : false;
