@@ -26,20 +26,32 @@ const Navigation = () => {
   };
 
   return (
-    <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="mr-auto">
-          <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-          <Nav.Link active={homeLinkActive} href="/home">
+    <Navbar bg="darkRed" variant="dark navigationBar" sticky="top">
+      <Navbar.Brand className="navText" href="#home">
+        <span className="navSpan">C</span>rypto{" "}
+        <span className="navSpan">C</span>urrencies{" "}
+        <span className="navSpan">U</span>pdates
+      </Navbar.Brand>
+      <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
+        <Nav className="justify-content-end">
+          <Nav.Link className="navText" active={homeLinkActive} href="/home">
             Home
           </Nav.Link>
           {loggedIn ? (
-            <Nav.Link active={profileLinkActive} href="/profile">
+            <Nav.Link
+              className="navText"
+              active={profileLinkActive}
+              href="/profile"
+            >
               Profile
             </Nav.Link>
           ) : null}
         </Nav>
-        <Button variant="primary" onClick={() => hanldeUserLogIn()}>
+        <Button
+          variant="outline-light"
+          size="lg"
+          onClick={() => hanldeUserLogIn()}
+        >
           Login
         </Button>
       </Navbar.Collapse>

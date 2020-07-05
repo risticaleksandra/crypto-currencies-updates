@@ -1,0 +1,13 @@
+.navigationBar {
+  width: 100%;
+  height: 10vh;
+}
+
+.navText {
+  @include navigationText;
+}
+
+.navSpan {
+  color: $secondaryLight;
+  font-weight: bolder;
+}

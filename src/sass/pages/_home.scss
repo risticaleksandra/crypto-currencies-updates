@@ -1,0 +1,27 @@
+.homeTable {
+  margin: 0 3rem;
+  background-color: $primaryLight;
+  border-radius: 0.8rem;
+  box-shadow: 0.2rem 0.2rem 0.2rem #772a20;
+  outline: none;
+}
+
+.homeTableBasic {
+  letter-spacing: 0.2rem;
+  color: $primaryBlack;
+  text-align: center;
+  padding: 2rem;
+}
+
+.homeTableHeader {
+  @extend .homeTableBasic;
+  font-size: 2rem;
+  font-weight: 600;
+  border-top-left-radius: 0.8rem;
+  border-top-right-radius: 0.8rem;
+}
+
+.tableInfo td {
+  font-size: 1.5rem;
+  @extend .homeTableBasic;
+}

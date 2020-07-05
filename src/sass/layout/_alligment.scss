@@ -1,0 +1,12 @@
+.wrapper {
+  @include pageBg;
+  @include reset;
+  margin-right: 0;
+  padding-right: 0;
+}
+
+.flexAlligmentCenter {
+  @include flexCentar;
+  width: 100%;
+  height: 100%;
+}

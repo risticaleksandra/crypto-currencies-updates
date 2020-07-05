@@ -1,24 +1,21 @@
 import React, { useState } from "react";
-import { Row, Col, Button } from "react-bootstrap";
-import Avatar from "react-avatar";
+import { Row, Button, Container, Card } from "react-bootstrap";
 
 const profile = {
   email: "ristic.aleksandra1990@gmail.com",
   github: "https://github.com/risticaleksandra",
 };
 const avatar = {
-  default: { src: "avatar.jpeg", buttonType: "primary" },
+  default: { src: "avatar.jpeg", buttonType: "darkRed" },
   toggled: {
     src: `https://api.adorable.io/avatars/285/${profile.email}`,
-    buttonType: "info",
+    buttonType: "dark",
   },
 };
 
 const Profile = () => {
   const [avatarImage, setAvatarImage] = useState(avatar.default.src);
-  const [buttonType, setButtonType] = useState(
-    avatar.default.buttonType
-  );
+  const [buttonType, setButtonType] = useState(avatar.default.buttonType);
 
   const setAvatarDetails = (details) => {
     setAvatarImage(details.src);
@@ -26,36 +23,35 @@ const Profile = () => {
   };
 
   const hanldeChangeAvatar = () => {
-    buttonType === "primary"
+    buttonType === "darkRed"
       ? setAvatarDetails(avatar.toggled)
       : setAvatarDetails(avatar.default);
   };
 
   return (
-    <>
-      <Row>
-        <Col xs={6} md={4}>
-          <Avatar src={avatarImage} size="200" />
-        </Col>
+    <Container fluid>
+      <Row className="wrapper profileWrapper">
+        <Card className="profileCard">
+          <Card.Header>
+            <Card.Title className="cardInfoHeading">
+              Aleksandra Ristic
+            </Card.Title>
+          </Card.Header>
+          <Card.Img variant="top cardAvatar" src={avatarImage} />
+          <Card.Body>
+            <Card.Text className="cardInfo">{profile.email}</Card.Text>
+            <Card.Link className="cardInfoLink" href={profile.github}>
+              {profile.github}
+            </Card.Link>
+            <Row className="cardInfo">
+              <Button variant={buttonType} onClick={() => hanldeChangeAvatar()}>
+                Toggle Avatar
+              </Button>
+            </Row>
+          </Card.Body>
+        </Card>
       </Row>
-      <Row>
-        <Col xs={6} md={4}>
-          <label>{profile.email}</label>
-        </Col>
-      </Row>
-      <Row>
-        <Col xs={6} md={4}>
-          <a href={profile.github}>{profile.github}</a>
-        </Col>
-      </Row>
-      <Row>
-        <Col xs={6} md={4}>
-          <Button variant={buttonType} onClick={() => hanldeChangeAvatar()}>
-            Toggle Avatar
-          </Button>
-        </Col>
-      </Row>
-    </>
+    </Container>
   );
 };
 export default Profile;

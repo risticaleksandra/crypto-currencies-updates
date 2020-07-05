@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import DefaultPage from "./layout/public/components/DefaultPage";
-import "./App.css";
 
 const symbols = ["tBTCUSD", "tBTCEUR", "tETHUSD", "tETHEUR", "tEOSUSD"];
 const wss = new WebSocket("wss://api-pub.bitfinex.com/ws/2");

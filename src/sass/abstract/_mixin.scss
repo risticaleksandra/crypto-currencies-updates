@@ -1,0 +1,57 @@
+@mixin pageBg {
+  background-color: $primaryDark;
+  width: 100vw;
+  height: calc(100vh - 10vh);
+}
+
+@mixin reset {
+  margin: 0;
+  padding: 0;
+}
+
+@mixin fontSizeM {
+  color: $secondaryLight;
+  font-size: 1.5rem;
+  letter-spacing: 0.2rem;
+}
+
+@mixin fontSizeL {
+  color: $primaryLight;
+  font-size: 2rem;
+  letter-spacing: 0.2rem;
+}
+
+@mixin fontSizeS {
+  color: $primaryLight;
+  font-size: 1rem;
+  letter-spacing: 0.2rem;
+}
+
+@mixin flexCentar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin navigationText {
+  @include baseTransition;
+  font-size: 1.4rem;
+  margin-right: 1rem;
+  letter-spacing: 0.2rem;
+  font-weight: 600;
+  color: $primaryLight;
+  &:hover {
+    color: $secondaryLight;
+    background-color: $primaryDark;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+  }
+}
+
+@mixin mainPadding {
+  padding: 0.5rem 1rem;
+}
+
+@mixin baseTransition {
+  transition: all 0.5s ease-in-out;
+}
